@@ -24,6 +24,12 @@
 <script src="node_modules/traceur/bin/traceur.js"></script>
 <script src="node_modules/systemjs/dist/system.js"></script>
 <script src="node_modules/es6-module-loader/dist/es6-module-loader-dev.js"></script>
+    
+    
+    
+    
+<script src="node_modules/three/three.js"></script>
+<script src="app/lib/OBJLoader.js"></script>
 
 <script>
     var gameEnviroment = null;
@@ -31,6 +37,11 @@
         "baseURL": "app/",
         "defaultJSExtensions": "true"
     });
+    SystemJS
+        .import('lib/GameEnviroment')
+        .then(function(GE) {
+            gameEnviroment = new GE.GameEnviroment();
+        });
     SystemJS
         .import('app')
         .then(function(app) {

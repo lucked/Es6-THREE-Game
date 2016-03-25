@@ -1,30 +1,63 @@
-import * as THREE from '/node_modules/three/three';
+import {GameEnviroment} from 'lib/GameEnviroment';
+import {RunTime} from 'lib/GameEnviroment';
 
 export class GameObject {
     constructor({
-        geometry = new THREE.BoxGeometry(0,0,0),
-        material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+        Mesh = null,
+        Url = null,
+        Scale = null,
+        Position = null
     }) {
+        var _this = this;
+        if (typeof Url == 'string') {
         
-        this.Mesh = new THREE.Mesh( geometry, material );
+            var loader = new THREE.ObjectLoader();
+
+            loader.load( Url , function ( object ) {
+                
+                _this.Mesh = object;
+                
+//                if(Scale != null) {
+//                    object.scale.set(1,1,1);
+//                }
+                
+                if(Position != null) {
+            
+                    _this.Mesh.position.set(0,0,0);
+                }
+                
+                gameEnviroment.addGameObject(_this);
+            });
+            
+        } else {
+            this.Mesh = Mesh;
+                
+            gameEnviroment.addGameObject(_this);
+        }
         
     }
     
     set([x,y,z]) {
-        this.Mesh.position.x = x;
-        this.Mesh.position.y = y;
-        this.Mesh.position.z = z;
+        if (this.Mesh != null && this.Mesh != 'undefined') {
+            this.Mesh.position.x = x;
+            this.Mesh.position.y = y;
+            this.Mesh.position.z = z;
+        }
     }
     
     move([x,y,z]) {
-        this.Mesh.translateX( x );
-        this.Mesh.translateY( y );
-        this.Mesh.translateZ( z );
+        if (this.Mesh != null && this.Mesh != 'undefined') {
+            this.Mesh.translateX( x );
+            this.Mesh.translateY( y );
+            this.Mesh.translateZ( z );
+        }
     }
     
     rotate([x,y,z]) {
-        this.Mesh.rotateX(x);
-        this.Mesh.rotateY(y);
-        this.Mesh.rotateZ(z);
+        if (this.Mesh != null && this.Mesh != 'undefined') {
+            this.Mesh.rotateX(x);
+            this.Mesh.rotateY(y);
+            this.Mesh.rotateZ(z);
+        }
     }
 }

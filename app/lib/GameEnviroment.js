@@ -1,7 +1,6 @@
-import THREE from '/node_modules/three/three';
-
 export class GameEnviroment {
     constructor() {
+        
         this.scene = new THREE.Scene();
         
         let cameraReach = 10000000;
@@ -15,6 +14,7 @@ export class GameEnviroment {
             material: new THREE.MeshBasicMaterial( {color: 0xaaaaff} ),
             geometry: new THREE.SphereGeometry( cameraReach / 2, 32, 32 )
         };
+        
         skyboxConf.material.side = THREE.BackSide;
         this.skybox = new THREE.Mesh( skyboxConf.geometry, skyboxConf.material );
         this.scene.add( this.skybox );
