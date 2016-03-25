@@ -29,7 +29,7 @@ export class GameEnviroment {
         return this._GameObjects;
     }
     addGameObject(gameObject) {
-        this.scene.add( gameObject.cube );
+        this.scene.add( gameObject.Mesh );
     }
     addUpdate(fn) {
         this.updateFNS.push(fn);
