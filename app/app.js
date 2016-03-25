@@ -12,6 +12,8 @@ export class Game {
         
         this.gameEnviroment.addGameObject(this.pc);
         this.gameEnviroment.addGameObject(this.floor);
+        
+        this.pc.Mesh.add(this.gameEnviroment.camera);
 
         this.gameEnviroment.camera.position.z = 500;
     }

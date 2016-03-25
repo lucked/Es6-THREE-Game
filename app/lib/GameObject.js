@@ -17,11 +17,14 @@ export class GameObject {
     }
     
     move([x,y,z]) {
-        let _this = this;
-        _this.set([
-            _this.Mesh.position.x + x,
-            _this.Mesh.position.y + y,
-            _this.Mesh.position.z + z
-        ]);
+        this.Mesh.translateX( x );
+        this.Mesh.translateY( y );
+        this.Mesh.translateZ( z );
+    }
+    
+    rotate([x,y,z]) {
+        this.Mesh.rotateX(x);
+        this.Mesh.rotateY(y);
+        this.Mesh.rotateZ(z);
     }
 }

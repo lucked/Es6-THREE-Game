@@ -16,7 +16,8 @@ export class PCCharacter extends Character {
     }
     update() {
         if (this.ctrl != undefined) {
-            this.move([this.ctrl.arrows.x, 0, this.ctrl.arrows.y]);
+            this.move([0, 0, this.ctrl.arrows.y]);
+            this.rotate([0, this.ctrl.arrows.x * 0.01, 0]);
         }
         document.getElementById('ui').innerHTML = this.health + '/' + this.currentHealth;
         
