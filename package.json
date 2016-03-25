@@ -1,0 +1,26 @@
+{
+  "name": "es6-three-game",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "puresamari",
+  "license": "GNU",
+  "dependencies": {
+    "es6-module-loader": "^0.17.11",
+    "systemjs": "^0.19.24",
+    "three": "^0.75.0",
+    "traceur": "0.0.104"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puresamari/Es6-THREE-Game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/puresamari/Es6-THREE-Game/issues"
+  },
+  "homepage": "https://github.com/puresamari/Es6-THREE-Game#readme",
+  "description": ""
+}
