@@ -1,34 +1,40 @@
+import {Camera} from 'lib/Camera';
+
 export class GameEnviroment {
     constructor() {
         
-        this.scene = new THREE.Scene();
+        let _this = this;
         
-        let cameraReach = 10000000;
+        _this.scene = new THREE.Scene();
         
-        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, cameraReach );
+        _this.camera = new Camera({});
         
-        this.fog = new THREE.Fog(0xaaaaaa, 0.1, cameraReach);
-        this.scene.fog = this.fog;
+        _this.camera.position.z = 500;
+        _this.camera.position.y = 150;
+        
+        _this.scene.add( _this.camera.anker );
+        
+        _this.fog = new THREE.Fog(0xaaaaaa, 0.1, _this.camera.reach);
+        _this.scene.fog = _this.fog;
         
         let skyboxConf = {
             material: new THREE.MeshBasicMaterial( {color: 0xaaaaff} ),
-            geometry: new THREE.SphereGeometry( cameraReach / 2, 32, 32 )
+            geometry: new THREE.SphereGeometry( _this.camera.reach / 2, 32, 32 )
         };
         
         skyboxConf.material.side = THREE.BackSide;
-        this.skybox = new THREE.Mesh( skyboxConf.geometry, skyboxConf.material );
-        this.scene.add( this.skybox );
+        _this.skybox = new THREE.Mesh( skyboxConf.geometry, skyboxConf.material );
+        _this.scene.add( _this.skybox );
         
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
+        _this.renderer = new THREE.WebGLRenderer();
+        _this.renderer.setSize( window.innerWidth, window.innerHeight );
         
-        document.getElementById('game').appendChild(this.renderer.domElement);
+        document.getElementById('game').appendChild( _this.renderer.domElement );
         
         this.updateFNS = [];
         
-        let _this = this,
-            renderScene = () => {
-                this.renderer.render( this.scene, this.camera );
+        let renderScene = () => {
+                _this.renderer.render( _this.scene, _this.camera );
                 for (let fn of _this.updateFNS) {
                     fn();
                 }

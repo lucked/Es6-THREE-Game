@@ -9,5 +9,6 @@ export class Game {
         
         this.pc = new PCCharacter();
         this.floor = new Floor();
+        this.npc1 = new Character();
     }
 }
