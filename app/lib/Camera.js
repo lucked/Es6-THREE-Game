@@ -20,4 +20,8 @@ export class Camera extends THREE.PerspectiveCamera {
            this.anker.position.add(v);
         }
     }
+    
+    rotateTo(quaternion, easingAmount = 0.01) {
+        this.anker.quaternion.slerp(quaternion, easingAmount);
+    }
 }

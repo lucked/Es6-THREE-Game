@@ -21,6 +21,7 @@ export class PCCharacter extends Character {
         
         if(this.Mesh != null) {
             gameEnviroment.camera.easeTo(this.Mesh.position);
+            gameEnviroment.camera.rotateTo(this.Mesh.quaternion);
         }
     }
 }

@@ -17,9 +17,9 @@ export class GameObject {
                 
                 _this.Mesh = object;
                 
-//                if(Scale != null) {
-//                    object.scale.set(1,1,1);
-//                }
+                if(Scale != null) {
+                    object.scale.set(Scale[0],Scale[1],Scale[2]);
+                }
                 
                 if(Position != null) {
             

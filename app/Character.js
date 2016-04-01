@@ -1,10 +1,8 @@
-//import * as THREE from '/node_modules/three/three';
-
 import {GameObject} from 'lib/GameObject';
 
 export class Character extends GameObject {
     constructor(health) {
-        super({Url: '/resources/model.json', Scale: [ 100, 200, 100 ]});
+        super({Url: '/resources/model.json', Scale: [ 100, 100, 100 ]});
         
         this.health = health;
         this.currentHealth = health;
