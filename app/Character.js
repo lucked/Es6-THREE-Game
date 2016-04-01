@@ -8,6 +8,8 @@ export class Character extends GameObject {
         this.currentHealth = health;
         this.updateSpeed = 1;
         
+        this.speed = 50;
+        
         this.start();
     }
     update() {}

@@ -13,8 +13,10 @@ export class PCCharacter extends Character {
     }
     update() {
         if (this.ctrl != undefined) {
-            this.move([0, 0, this.ctrl.arrows.y]);
-            this.rotate([0, this.ctrl.arrows.x * 0.01, 0]);
+            let rotation = this.ctrl.arrows.x * this.speed * 0.0003,
+                movement = this.ctrl.arrows.y * this.speed * 0.04;
+            this.move([0, 0, movement]);
+            this.rotate([0, rotation, 0]);
         }
         
         document.getElementById('ui').innerHTML = this.health + '/' + this.currentHealth;
