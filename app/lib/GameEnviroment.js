@@ -41,9 +41,17 @@ export class GameEnviroment {
                 _this.updateTimer = setTimeout(renderScene, 1);
             }
         renderScene();
+        
+        this.clock = new THREE.Clock();
+    }
+    get DeltaTime() {
+        return this.clock.getDelta();
     }
     addGameObject(gameObject) {
         this.scene.add( gameObject.Mesh );
+    }
+    addMesh(Mesh) {
+        this.scene.add( Mesh );
     }
     addUpdate(fn) {
         this.updateFNS.push(fn);

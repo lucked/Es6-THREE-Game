@@ -11,26 +11,35 @@ export class GameObject {
         var _this = this;
         if (typeof Url == 'string') {
         
-            var loader = new THREE.ObjectLoader();
+            let loader = new THREE.JSONLoader();
+			var clock = new THREE.Clock();
 
-            loader.load( Url , function ( object ) {
+            loader.load( Url , function (  geometry, materials  ) {
                 
-                _this.Mesh = object;
+                var originalMaterial = materials[ 0 ];
+                originalMaterial.skinning = true;
+
+                _this.Mesh = new THREE.SkinnedMesh( geometry, originalMaterial );
+
+                _this.mixer = new THREE.AnimationMixer( _this.Mesh );
                 
-                if(Scale != null) {
-                    object.scale.set(Scale[0],Scale[1],Scale[2]);
+                for ( var i = 0; i < geometry.animations.length; ++ i ) {
+                     _this.mixer.clipAction( geometry.animations[ i ] );
                 }
                 
-                if(Position != null) {
-            
-                    _this.Mesh.position.set(0,0,0);
-                }
+                _this.mixer.clipAction('walk').setEffectiveWeight( 1 / 3 ).play();
                 
                 gameEnviroment.addGameObject(_this);
+                
+                gameEnviroment.addUpdate(function(){
+                    _this.mixer.update(gameEnviroment.DeltaTime);
+                });
+                
             });
             
         } else {
-            this.Mesh = Mesh;
+            
+            _this.Mesh = Mesh;
                 
             gameEnviroment.addGameObject(_this);
         }

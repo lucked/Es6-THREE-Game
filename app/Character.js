@@ -2,7 +2,7 @@ import {GameObject} from 'lib/GameObject';
 
 export class Character extends GameObject {
     constructor(health) {
-        super({Url: '/resources/model.json', Scale: [ 100, 100, 100 ]});
+        super({Url: '/resources/model.json', Scale: [ 1, 1, 1 ]});
         
         this.health = health;
         this.currentHealth = health;
