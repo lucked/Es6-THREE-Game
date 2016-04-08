@@ -1,5 +1,4 @@
-import {GameEnviroment} from 'lib/GameEnviroment';
-import {RunTime} from 'lib/GameEnviroment';
+import {Animator} from 'lib/Animator';
 
 export class GameObject {
     constructor({
@@ -12,7 +11,6 @@ export class GameObject {
         if (typeof Url == 'string') {
         
             let loader = new THREE.JSONLoader();
-			var clock = new THREE.Clock();
 
             loader.load( Url , function (  geometry, materials  ) {
                 
@@ -20,21 +18,12 @@ export class GameObject {
                 originalMaterial.skinning = true;
 
                 _this.Mesh = new THREE.SkinnedMesh( geometry, originalMaterial );
-
-                _this.mixer = new THREE.AnimationMixer( _this.Mesh );
                 
-                for ( var i = 0; i < geometry.animations.length; ++ i ) {
-                     _this.mixer.clipAction( geometry.animations[ i ] );
-                }
+                _this.animator = new Animator(_this.Mesh);
                 
-                _this.mixer.clipAction('walk').setEffectiveWeight( 1 / 3 ).play();
+                _this.animator.Animation = 'walk';
                 
                 gameEnviroment.addGameObject(_this);
-                
-                gameEnviroment.addUpdate(function(){
-                    _this.mixer.update(gameEnviroment.DeltaTime);
-                });
-                
             });
             
         } else {
