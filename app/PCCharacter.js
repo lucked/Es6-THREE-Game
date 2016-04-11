@@ -15,7 +15,9 @@ export class PCCharacter extends Character {
         if (this.ctrl != undefined) {
             let rotation = this.ctrl.arrows.x * this.speed * 0.0003,
                 movement = this.ctrl.arrows.y * this.speed * 0.04;
-            this.animMove(new THREE.Vector3(0, 0, 1), movement);
+            if(this.ctrl.arrows.y != 0 || this.movementAxis.z != 0) {
+                this.animMove(new THREE.Vector3(0, 0, this.ctrl.arrows.y));
+            }
             this.rotate([0, rotation, 0]);
         }
         

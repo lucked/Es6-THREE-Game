@@ -24,14 +24,14 @@ export class GameObject {
                 
                 _this.animator = new Animator(_this.Mesh);
                 
-                _this.animator.Animation = 'walk';
-                
                 gameEnviroment.addGameObject(_this);
             });
             
         }
                 
         gameEnviroment.addGameObject(_this);
+        
+        this.fns = [];
     }
     
     update() {}
@@ -59,5 +59,8 @@ export class GameObject {
     
     systemUpdate() {
         this.update();
+        for (let fn of this.fns) {
+            fn();
+        }
     }
 }
