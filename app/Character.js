@@ -9,19 +9,5 @@ export class Character extends GameObject {
         this.updateSpeed = 1;
         
         this.speed = 50;
-        
-        this.start();
-    }
-    update() {}
-    start() {
-        let _this = this,
-            systemUpdate = () => {
-                _this.update();
-                _this.updateTimer = setTimeout(systemUpdate, _this.updateSpeed);
-            }
-        systemUpdate();
-    }
-    stop() {
-        window.clearTimeout(this.updateTimer)
     }
 }

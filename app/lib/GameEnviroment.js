@@ -31,7 +31,13 @@ export class GameEnviroment {
         
         document.getElementById('game').appendChild( _this.renderer.domElement );
         
-        this.updateFNS = [];
+        this.gameObjects = [];
+        
+        this.updateFNS = [() => {
+            for (let object of _this.gameObjects) {
+                object.systemUpdate();
+            }
+        }];
         
         let renderScene = () => {
                 _this.renderer.render( _this.scene, _this.camera );
@@ -49,6 +55,7 @@ export class GameEnviroment {
     }
     addGameObject(gameObject) {
         this.scene.add( gameObject.Mesh );
+        this.gameObjects.push( gameObject );
     }
     addMesh(Mesh) {
         this.scene.add( Mesh );

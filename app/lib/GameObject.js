@@ -2,12 +2,15 @@ import {Animator} from 'lib/Animator';
 
 export class GameObject {
     constructor({
-        Mesh = null,
+        Mesh =  new THREE.Mesh( new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial( { color: 0x00ff00 } ) ),
         Url = null,
         Scale = null,
         Position = null
     }) {
         var _this = this;
+            
+        _this.Mesh = Mesh;
+        
         if (typeof Url == 'string') {
         
             let loader = new THREE.JSONLoader();
@@ -26,14 +29,12 @@ export class GameObject {
                 gameEnviroment.addGameObject(_this);
             });
             
-        } else {
-            
-            _this.Mesh = Mesh;
-                
-            gameEnviroment.addGameObject(_this);
         }
-        
+                
+        gameEnviroment.addGameObject(_this);
     }
+    
+    update() {}
     
     set([x,y,z]) {
         if (this.Mesh != null && this.Mesh != 'undefined') {
@@ -57,5 +58,9 @@ export class GameObject {
             this.Mesh.rotateY(y);
             this.Mesh.rotateZ(z);
         }
+    }
+    
+    systemUpdate() {
+        this.update();
     }
 }
