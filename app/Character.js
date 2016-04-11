@@ -10,4 +10,8 @@ export class Character extends GameObject {
         
         this.speed = 50;
     }
+    
+    animMove(axis, distance) {
+        this.move(axis, distance);
+    }
 }

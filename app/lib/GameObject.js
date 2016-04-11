@@ -36,19 +36,16 @@ export class GameObject {
     
     update() {}
     
-    set([x,y,z]) {
+    set(vector) {
+        let difference = new THREE.Vector3( 1, 0, 0 );
         if (this.Mesh != null && this.Mesh != 'undefined') {
-            this.Mesh.position.x = x;
-            this.Mesh.position.y = y;
-            this.Mesh.position.z = z;
+            this.Mesh.position.set(vector)
         }
     }
     
-    move([x,y,z]) {
+    move(axis, distance) {
         if (this.Mesh != null && this.Mesh != 'undefined') {
-            this.Mesh.translateX( x );
-            this.Mesh.translateY( y );
-            this.Mesh.translateZ( z );
+            this.Mesh.translateOnAxis(axis, distance);
         }
     }
     
