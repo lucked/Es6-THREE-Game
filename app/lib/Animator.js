@@ -8,12 +8,13 @@ export class Animator {
 
         for ( var i = 0; i < this.mesh.geometry.animations.length; ++ i ) {
             let anim = this.mixer.clipAction( this.mesh.geometry.animations[ i ] );
-            anim.setEffectiveWeight( 1 / 3 );
         }
 
         gameEnviroment.addUpdate(function(){
             _this.mixer.update(gameEnviroment.DeltaTime);
         });
+        
+        console.log(this.mixer);
     }
     
     set Animation(animation) {
@@ -22,12 +23,18 @@ export class Animator {
     
     setAnimation(animation, direction = 1) {
         let anim = this.mixer.clipAction(animation);
-        anim.setEffectiveWeight( 1 / 3 );
-        anim.timeScale = direction;
-        anim.play();
+        if(!anim.isRunning()) {
+            anim.timeScale = direction;
+            anim.fadeIn(1);
+            anim.play();
+        }
     }
     
     stopAnimation(animation) {
-        this.mixer.clipAction(animation).setEffectiveWeight(0).stop();
+        let anim = this.mixer.clipAction(animation);
+        if(anim.isRunning()) {
+            anim.fadeOut(1);
+            anim.stop();
+        }
     }
 }

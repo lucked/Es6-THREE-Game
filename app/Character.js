@@ -15,9 +15,7 @@ export class Character extends GameObject {
         
         this.fns.push(() => {
             if(_this.animator != undefined) {
-                if(!_this.movementAxis.equals(new THREE.Vector3(0,0,0))) {
-                    _this.animator.setAnimation('idle');
-                }
+                _this.animator.setAnimation('idle');
                 if (_this.movementAxis.z > 0) {
                     _this.animator.setAnimation('walk', -1);
                 } else if (_this.movementAxis.z < 0) {
