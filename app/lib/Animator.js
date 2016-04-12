@@ -1,3 +1,30 @@
+export class AnimationSheet {
+    constructor() {
+        this.values = {};
+        this.animations = {};
+    }
+    
+    value(valueIndex, value) {
+        this.values[valueIndex] = value;
+    }
+    
+    setAnimation(animationIndex, valueI) {
+        this.animations[animationIndex] = {
+            valueIndex: valueI
+        };
+    }
+    
+    get Animations () {
+        
+        let returnValue = {};
+        
+        for (let animation of this.animations) {
+//            returnValue[animation]
+            console.log(animation);
+        }
+    }
+}
+
 export class Animator {
     constructor (mesh) {
         let _this = this;
@@ -13,8 +40,7 @@ export class Animator {
         gameEnviroment.addUpdate(function(){
             _this.mixer.update(gameEnviroment.DeltaTime);
         });
-        
-        console.log(this.mixer);
+        this.sheet = new AnimationSheet();
     }
     
     set Animation(animation) {
