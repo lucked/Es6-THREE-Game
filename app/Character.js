@@ -1,5 +1,7 @@
 import {GameObject} from 'lib/GameObject';
 
+import {Animator} from 'lib/Animator';
+
 export class Character extends GameObject {
     constructor(health) {
         super(
@@ -12,30 +14,33 @@ export class Character extends GameObject {
         
         this.speed = 50;
         this.movementAxis = new THREE.Vector3(0,0,0);
+        this.rotation = [0, 0, 0];
         
         let _this = this;
         
-        console.log(_this.animator);
-//        _this.animator.sheet.value('forward', 0);
-//        _this.animator.sheet.setAnimation('walk', 'forward');
+        let animator = new Animator();
+        
+        animator.sheet.value('forward', 0);
+        animator.sheet.setAnimation('walk', 'forward');
+        
+        this.addScript(animator);
         
         this.fns.push(() => {
-            if(_this.animator != undefined) {
-//                console.log(_this.animator.sheet);
-//                _this.animator.setAnimation('idle');
-//                if (_this.movementAxis.z > 0) {
-//                    _this.animator.setAnimation('walk', -1);
-//                } else if (_this.movementAxis.z < 0) {
-//                    _this.animator.setAnimation('walk', 1);
-//                } else {
-//                    _this.animator.stopAnimation('walk');
-//                }
-            }
-        })
+            _this.move(_this.movementAxis, 0.01 * _this.speed);
+        });
+        
+        this.fns.push(() => {
+            _this.rotate(_this.rotation);
+        });
+        
     }
     
-    animMove(axis) {
-        this.move(axis, this.speed / 100);
+    setMovement(axis) {
         this.movementAxis = axis;
+        let animator = this.getScriptByTag('animator');
+
+        if(animator != false) {
+            animator().sheet.value('forward', Math.abs(axis.z));
+        }
     }
 }

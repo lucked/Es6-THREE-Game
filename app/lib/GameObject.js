@@ -9,7 +9,11 @@ export class GameObject {
     }) {
         var _this = this;
             
-        _this.Mesh = Mesh;
+        _this.Mesh = null;
+        _this.ready = false;
+        
+        this.fns = [];
+        this.scripts = [];
         
         if (typeof Url == 'string') {
         
@@ -22,19 +26,19 @@ export class GameObject {
 
                 _this.Mesh = new THREE.SkinnedMesh( geometry, originalMaterial );
                 
-                _this.animator = new Animator(_this.Mesh);
-                
                 gameEnviroment.addGameObject(_this);
+                
+                _this.startScripts();
             });
             
+        } else {
+            _this.Mesh = Mesh;
+            
+            gameEnviroment.addGameObject(_this);
+            
+            _this.startScripts();
         }
-                
-        gameEnviroment.addGameObject(_this);
-        
-        this.fns = [];
     }
-    
-    update() {}
     
     set(vector) {
         let difference = new THREE.Vector3( 1, 0, 0 );
@@ -57,10 +61,44 @@ export class GameObject {
         }
     }
     
+    addScript(script) {
+        let newId = this.scripts.length,
+            newScript = script,
+            _this = this;
+        
+        newScript.gameObject = function(){ return _this; };
+        
+        this.scripts[newId] = newScript;
+        if (_this.ready) {
+            this.scripts[newId].start();
+        }
+    }
+    
+    getScriptByTag(scriptTag) {
+        let _this = this,
+            retScript = false;
+        this.scripts.forEach(function(script, key) {
+            if (script.tag == scriptTag) {
+                retScript = () => { return _this.scripts[key] };
+            }
+        });
+        return retScript;
+    }
+    
+    startScripts() {
+        this.scripts.forEach(function(script) {
+            script.start();
+        });
+        
+        this.ready = true;
+    }
+    
     systemUpdate() {
-        this.update();
         for (let fn of this.fns) {
             fn();
+        }
+        for (let script of this.scripts) {
+            script.update();
         }
     }
 }

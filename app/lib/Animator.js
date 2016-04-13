@@ -1,46 +1,33 @@
-export class AnimationSheet {
-    constructor() {
-        this.values = {};
-        this.animations = {};
-    }
-    
-    value(valueIndex, value) {
-        this.values[valueIndex] = value;
-    }
-    
-    setAnimation(animationIndex, valueI) {
-        this.animations[animationIndex] = {
-            valueIndex: valueI
-        };
-    }
-    
-    get Animations () {
+import {Script} from 'lib/Script';
+import {AnimationSheet} from 'lib/AnimationSheet';
+
+export class Animator extends Script {
+    constructor () {
+        super('animator');
         
-        let returnValue = {};
-        
-        for (let animation of this.animations) {
-//            returnValue[animation]
-            console.log(animation);
-        }
-    }
-}
-
-export class Animator {
-    constructor (mesh) {
-        let _this = this;
-        
-        this.mesh = mesh;
-
-        this.mixer = new THREE.AnimationMixer( this.mesh );
-
-        for ( var i = 0; i < this.mesh.geometry.animations.length; ++ i ) {
-            let anim = this.mixer.clipAction( this.mesh.geometry.animations[ i ] );
-        }
-
-        gameEnviroment.addUpdate(function(){
-            _this.mixer.update(gameEnviroment.DeltaTime);
-        });
         this.sheet = new AnimationSheet();
+    }
+    
+    updateAnimations() {
+        let _this = this;
+        this.sheet.Animations.forEach(function(animation) {
+            _this.mixer.clipAction(animation.name)
+                .setEffectiveWeight(animation.value).play();
+        });
+    }
+    
+    update() {
+        this.updateAnimations();
+        this.mixer.update(gameEnviroment.DeltaTime);
+    }
+    
+    start() {
+        let _this = this;
+        this.mixer = new THREE.AnimationMixer( _this.gameObject().Mesh );
+        for ( var i = 0; i < _this.gameObject().Mesh.geometry.animations.length; ++ i ) {
+            let anim = this.mixer.clipAction( _this.gameObject().Mesh.geometry.animations[ i ] );
+        }
+        this.updateAnimations();
     }
     
     set Animation(animation) {

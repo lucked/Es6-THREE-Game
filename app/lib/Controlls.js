@@ -13,10 +13,25 @@ export class Controlls {
         }
         
         let systemUpdate = () => {
-                _this.arrows.x = (_this.keys[37] ? -1 : 0) + (_this.keys[39] ? 1 : 0);
-                _this.arrows.y = (_this.keys[38] ? -1 : 0) + (_this.keys[40] ? 1 : 0);
-                _this.updateTimer = setTimeout(systemUpdate, 100);
+            let x = (_this.keys[37] ? -1 : 0) + (_this.keys[39] ? 1 : 0),
+                y = (_this.keys[38] ? -1 : 0) + (_this.keys[40] ? 1 : 0);
+            
+            let changed = 
+                x != _this.arrows.x || 
+                y != _this.arrows.y;
+            
+            _this.arrows.x = x;
+            _this.arrows.y = y;
+            _this.updateTimer = setTimeout(systemUpdate, 100);
+            
+            if (changed) {
+                _this.onChange();
             }
+        }
         systemUpdate();
+    }
+    
+    onChange() { 
+        console.info('no onchange for controll is defined!'); 
     }
 }

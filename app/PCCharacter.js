@@ -10,22 +10,27 @@ export class PCCharacter extends Character {
         this.ctrl = new Controlls();
         
         this.name = 'Simon';
-    }
-    update() {
-        if (this.ctrl != undefined) {
-            let rotation = this.ctrl.arrows.x * this.speed * 0.0003,
-                movement = this.ctrl.arrows.y * this.speed * 0.04;
-            if(this.ctrl.arrows.y != 0 || this.movementAxis.z != 0) {
-                this.animMove(new THREE.Vector3(0, 0, this.ctrl.arrows.y));
+        
+        console.log('etst');
+        
+        let _this = this;
+        
+        this.fns.push(() => {
+            if(_this.Mesh != null) {
+                gameEnviroment.camera.easeTo(_this.Mesh.position);
+                gameEnviroment.camera.rotateTo(_this.Mesh.quaternion);
             }
-            this.rotate([0, rotation, 0]);
-        }
+
+            document.getElementById('ui').innerHTML = _this.health + '/' + _this.currentHealth;
+        })
         
-        document.getElementById('ui').innerHTML = this.health + '/' + this.currentHealth;
-        
-        if(this.Mesh != null) {
-            gameEnviroment.camera.easeTo(this.Mesh.position);
-            gameEnviroment.camera.rotateTo(this.Mesh.quaternion);
-        }
+        this.ctrl.onChange = function(){
+            
+            let ctrl = this;
+            
+            _this.rotation = [0, ctrl.arrows.x * _this.speed * 0.0003, 0];
+
+            _this.setMovement(new THREE.Vector3(0, 0, ctrl.arrows.y));
+        };
     }
 }
