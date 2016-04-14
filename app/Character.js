@@ -33,6 +33,8 @@ export class Character extends GameObject {
             _this.rotate(_this.rotation);
         });
         
+//        this.Mesh.castShadow = true;
+//        this.Mesh.receiveShadow = false;
     }
     
     setMovement(axis) {

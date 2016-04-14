@@ -1,4 +1,5 @@
 import {Camera} from 'lib/Camera';
+import {LightList} from 'lib/LightList';
 
 export class GameEnviroment {
     constructor() {
@@ -14,6 +15,11 @@ export class GameEnviroment {
         
         _this.scene.add( _this.camera.anker );
         
+        _this.light = new LightList();
+        _this.light.lightAnker.y = 500;
+        _this.light.lightAnker.z = 500;
+        _this.scene.add( _this.light.lightAnker );
+        
         _this.fog = new THREE.Fog(0xaaaaaa, 0.1, _this.camera.reach);
         _this.scene.fog = _this.fog;
         
@@ -28,6 +34,7 @@ export class GameEnviroment {
         
         _this.renderer = new THREE.WebGLRenderer();
         _this.renderer.setSize( window.innerWidth, window.innerHeight );
+        _this.renderer.shadowMap.enabled = true;
         
         document.getElementById('game').appendChild( _this.renderer.domElement );
         
