@@ -32,12 +32,10 @@ export class Character extends GameObject {
         this.fns.push(() => {
             _this.rotate(_this.rotation);
         });
-        
-//        this.Mesh.castShadow = true;
-//        this.Mesh.receiveShadow = false;
     }
     
     setMovement(axis) {
+        
         this.movementAxis = axis;
         let animator = this.getScriptByTag('animator');
 
