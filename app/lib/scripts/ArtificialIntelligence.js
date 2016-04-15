@@ -1,14 +1,17 @@
 import {Script} from 'lib/Script';
 
 export class ArtificialIntelligence extends Script {
+    AITick() {
+        this.gameObject().setMovement(
+            new THREE.Vector3(0,0, Math.round(Math.random() * 2 - 1) ) 
+        );
+    }
+    
     start() {
-        console.log('test');
-        
+        let _this = this;
         let movetimeout = () => {
             if(typeof this.gameObject == 'function') {
-                this.gameObject().setMovement(
-                    new THREE.Vector3(0,0, Math.round(Math.random() * 2 - 1) ) 
-                );
+                _this.AITick();
             }
             setTimeout(movetimeout, 1000);
         }
