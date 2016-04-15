@@ -8,10 +8,12 @@ export class AnimationSheet {
         this.values[valueIndex] = value;
     }
     
-    setAnimation(animationName, valueI) {
+    setAnimation(animationName, valueI, dependency) {
+        
         this.animationList[animationName] = {
             'valueIndex': valueI,
-            'animationName': animationName
+            'animationName': animationName,
+            'dependency': dependency
         };
     }
     
@@ -22,6 +24,11 @@ export class AnimationSheet {
         for (let animationName in this.animationList) {
             let ani = this.animationList[animationName],
                 value = this.values[ani.valueIndex];
+            
+            if(typeof ani.dependency == 'function') {
+                value = ani.dependency(value);
+            }
+            
             returnValue.push({
                 'name': ani.animationName, 
                 'value': value,

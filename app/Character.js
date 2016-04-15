@@ -21,7 +21,7 @@ export class Character extends GameObject {
         let animator = new Animator();
         
         animator.sheet.value('forward', 0);
-        animator.sheet.setAnimation('walk', 'forward');
+        animator.sheet.setAnimation('walk', 'forward', val => val / 2);
         
         this.addScript(animator);
         
