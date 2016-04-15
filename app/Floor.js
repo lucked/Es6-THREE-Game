@@ -1,5 +1,3 @@
-//import * as THREE from '/node_modules/three/three';
-
 import {GameObject} from 'lib/GameObject';
 
 export class Floor extends GameObject {

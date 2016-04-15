@@ -1,5 +1,5 @@
 import {Character} from 'Character';
-import {PlayerCharacter} from 'lib/PlayerCharacter';
+import {PlayerCharacter} from 'lib/scripts/PlayerCharacter';
 
 export class PCCharacter extends Character {
     constructor() {

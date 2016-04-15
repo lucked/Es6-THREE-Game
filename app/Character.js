@@ -1,6 +1,6 @@
 import {GameObject} from 'lib/GameObject';
 
-import {Animator} from 'lib/Animator';
+import {Animator} from 'lib/scripts/Animator';
 
 export class Character extends GameObject {
     constructor(health) {

@@ -1,5 +1,5 @@
 import {Character} from 'Character';
-import {ArtificialIntelligence} from 'lib/ArtificialIntelligence';
+import {ArtificialIntelligence} from 'lib/scripts/ArtificialIntelligence';
 
 export class NPCCharacter extends Character {
     constructor() {

@@ -1,8 +1,8 @@
 import {GameEnviroment} from 'lib/GameEnviroment';
 import {RunTime} from 'lib/GameEnviroment';
 
-import {PCCharacter} from 'PCCharacter';
-import {NPCCharacter} from 'NPCCharacter';
+import {PCCharacter} from 'presets/PCCharacter';
+import {NPCCharacter} from 'presets/NPCCharacter';
 
 import {Floor} from 'Floor';
 

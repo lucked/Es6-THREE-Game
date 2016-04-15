@@ -1,5 +1,5 @@
 import {Script} from 'lib/Script';
-import {AnimationSheet} from 'lib/AnimationSheet';
+import {AnimationSheet} from 'lib/scripts/AnimationSheet';
 
 export class Animator extends Script {
     constructor () {
