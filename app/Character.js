@@ -35,7 +35,6 @@ export class Character extends GameObject {
     }
     
     setMovement(axis) {
-        
         this.movementAxis = axis;
         let animator = this.getScriptByTag('animator');
 

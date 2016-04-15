@@ -29,25 +29,4 @@ export class Animator extends Script {
         }
         this.updateAnimations();
     }
-    
-    set Animation(animation) {
-        this.mixer.clipAction(animation).setEffectiveWeight( 1 / 3 ).play();
-    }
-    
-    setAnimation(animation, direction = 1) {
-        let anim = this.mixer.clipAction(animation);
-        if(!anim.isRunning()) {
-            anim.timeScale = direction;
-            anim.fadeIn(1);
-            anim.play();
-        }
-    }
-    
-    stopAnimation(animation) {
-        let anim = this.mixer.clipAction(animation);
-        if(anim.isRunning()) {
-            anim.fadeOut(1);
-            anim.stop();
-        }
-    }
 }

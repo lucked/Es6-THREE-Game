@@ -5,7 +5,7 @@ export class PCCharacter extends Character {
     constructor() {
         super(200);
         
-        let _this = this;
+        this.name = 'simon';
         
         this.addScript(new PlayerCharacter());
     }
