@@ -2,7 +2,7 @@ import {Script} from 'lib/Script';
 
 export class ArtificialIntelligence extends Script {
     AITick() {
-        this.gameObject().setMovement(
+        this.GameObject.setMovement(
             new THREE.Vector3(0,0, Math.round(Math.random() * 2 - 1) ) 
         );
     }
@@ -10,7 +10,7 @@ export class ArtificialIntelligence extends Script {
     start() {
         let _this = this;
         let movetimeout = () => {
-            if(typeof this.gameObject == 'function') {
+            if(typeof this.GameObject != null) {
                 _this.AITick();
             }
             setTimeout(movetimeout, 1000);

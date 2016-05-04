@@ -23,9 +23,9 @@ export class Animator extends Script {
     
     start() {
         let _this = this;
-        this.mixer = new THREE.AnimationMixer( _this.gameObject().Mesh );
-        for ( var i = 0; i < _this.gameObject().Mesh.geometry.animations.length; ++ i ) {
-            let anim = this.mixer.clipAction( _this.gameObject().Mesh.geometry.animations[ i ] );
+        this.mixer = new THREE.AnimationMixer( _this.GameObject.Mesh );
+        for ( var i = 0; i < _this.GameObject.Mesh.geometry.animations.length; ++ i ) {
+            let anim = this.mixer.clipAction( _this.GameObject.Mesh.geometry.animations[ i ] );
         }
         this.updateAnimations();
     }

@@ -5,7 +5,7 @@ import {Animator} from 'lib/scripts/Animator';
 export class Character extends GameObject {
     constructor(health) {
         super(
-            {Url: '/resources/ignore.marine/marine_anims.js', Scale: [ 1, 1, 1 ]}
+            {Url: '/resources/ignore.models/ani_model.json', Scale: [ 1, 1, 1 ]}
         );
         
         this.health = health;

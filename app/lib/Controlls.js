@@ -25,7 +25,7 @@ export class Controlls {
             _this.updateTimer = setTimeout(systemUpdate, 100);
             
             if (changed) {
-                _this.onChange();
+                _this.onChange(_this);
             }
         }
         systemUpdate();

@@ -7,13 +7,11 @@ export class PlayerCharacter extends Script {
         
         let _this = this;
         
-        this.ctrl.onChange = function(){
+        this.ctrl.onChange = ctrl => {
             
-            let ctrl = this;
-            
-            _this.gameObject().rotation = [0, ctrl.arrows.x * _this.gameObject().speed * 0.0003, 0];
+            _this.GameObject.rotation = [0, ctrl.arrows.x * _this.GameObject.speed * 0.0003, 0];
 
-            _this.gameObject().setMovement(new THREE.Vector3(0, 0, ctrl.arrows.y));
+            _this.GameObject.setMovement(new THREE.Vector3(0, 0, ctrl.arrows.y));
         };
     }
     

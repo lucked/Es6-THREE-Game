@@ -15,14 +15,14 @@ export class GameObject {
         
         if (typeof Url == 'string') {
         
-            let loader = new THREE.JSONLoader();
+            let loader = new THREE.ObjectLoader();
 
-            loader.load( Url , function (  geometry, materials  ) {
-                
-                var originalMaterial = materials[ 0 ];
+            loader.load( Url , function (object) {
+                var selected_object = object.children[ 0 ];
+                var originalMaterial = selected_object.material;
                 originalMaterial.skinning = true;
 
-                _this.Mesh = new THREE.SkinnedMesh( geometry, originalMaterial );
+                _this.Mesh = new THREE.SkinnedMesh( selected_object.geometry, originalMaterial );
                 
                 gameEnviroment.addGameObject(_this);
                 
